@@ -1,2 +1,7 @@
-export const CADASTRO = 'CADASTRO';
-export const LOGIN = 'LOGIN';
+export const CADASTRO_SUCESS = 'CADASTRO_SUCESS';
+export const CADASTRO_REQUEST = 'CADASTRO_REQUEST';
+export const CADASTRO_FAILURE = 'CADASTRO_FAILURE';
+
+export const LOGIN_SUCESS = 'LOGIN_SUCESS';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';

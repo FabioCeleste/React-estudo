@@ -1,7 +1,9 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { isEmail } from 'validator';
 
-import * as actions from '../../store/modules/example/actions';
+import axios from '../../services/axios';
+import history from '../../services/history';
 import {
   Container,
   Login,
@@ -13,19 +15,41 @@ import {
 } from './styles';
 
 function Home() {
-  const dispatch = useDispatch();
+  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const botaoClicado = useSelector((state) => console.log(state));
-
-  const handleRegister = (e) => {
+  async function handleRegisterSubmit(e) {
     e.preventDefault();
-    dispatch(actions.clickRegister());
-  };
+    let formErrors = false;
+    if (userName.length < 3 || userName.lenght > 255) {
+      formErrors = true;
+      toast.error('Usuario deve ter de 3 a 255 caracteres');
+    }
+    if (password.length < 3 || password.lenght > 255) {
+      formErrors = true;
+      toast.error('Senha deve ter de 6 a 255 caracteres');
+    }
+    if (!isEmail(email)) {
+      formErrors = true;
+      toast.error('Email invalido');
+    }
+    if (formErrors) return;
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    dispatch(actions.clickLogin());
-  };
+    try {
+      await axios.post('/new-user', {
+        user_name: userName,
+        email,
+        password,
+      });
+      toast.success('Seja Bem Vindo');
+      history.push('/list');
+    } catch (e) {
+      e.response.data.errors.map((error) => {
+        return toast.error(error);
+      });
+    }
+  }
 
   return (
     <>
@@ -34,19 +58,30 @@ function Home() {
           <Form action="submit">
             <Input type="text" placeholder="Usuario" />
             <Input type="password" placeholder="Senha" />
-            <BtnLogin type="submit" onClick={handleLogin}>
-              Entrar
-            </BtnLogin>
+            <BtnLogin type="submit">Entrar</BtnLogin>
           </Form>
         </Login>
         <Register>
-          <Form action="submit">
-            <Input type="text" placeholder="Usuario" />
-            <Input type="text" placeholder="E-mail" />
-            <Input type="password" placeholder="Senha" />
-            <BtnRegister type="submit" onClick={handleRegister}>
-              Cadastrar
-            </BtnRegister>
+          <Form onSubmit={handleRegisterSubmit}>
+            <Input
+              type="text"
+              placeholder="Usuario"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <BtnRegister type="submit">Cadastrar</BtnRegister>
           </Form>
         </Register>
       </Container>
