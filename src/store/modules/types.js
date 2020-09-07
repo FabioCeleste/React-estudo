@@ -7,3 +7,6 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 export const PERSIST_REHYDRATE = 'persist/REHYDRATE';
+
+export const CHANGE_LETTER = 'CHANGE_LETTER';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
