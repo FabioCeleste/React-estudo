@@ -13,7 +13,7 @@ function Routes() {
     <Switch>
       <MyRoute exact path="/" component={Home} />
       <MyRoute exact path="/profile" component={Profile} />
-      <MyRoute exact path="/list" component={List} isClosed={false} />
+      <MyRoute exact path="/list" component={List} isClosed />
       <MyRoute path="*" component={NotFound} />
     </Switch>
   );

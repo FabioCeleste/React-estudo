@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
+import { useDispatch } from 'react-redux';
+import { get } from 'lodash';
 
 import axios from '../../services/axios';
 import history from '../../services/history';
+import * as actions from '../../store/modules/auth/actions';
 import {
   Container,
   Login,
@@ -14,10 +17,16 @@ import {
   BtnRegister,
 } from './styles';
 
-function Home() {
+function Home(props) {
+  const dispatch = useDispatch();
+  const prevPath = get(props, 'location.state.prevPath', '/list');
+
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginEmail, setLoginEmail] = useState('');
 
   async function handleRegisterSubmit(e) {
     e.preventDefault();
@@ -26,7 +35,7 @@ function Home() {
       formErrors = true;
       toast.error('Usuario deve ter de 3 a 255 caracteres');
     }
-    if (password.length < 3 || password.lenght > 255) {
+    if (password.length < 6 || password.lenght > 255) {
       formErrors = true;
       toast.error('Senha deve ter de 6 a 255 caracteres');
     }
@@ -51,13 +60,42 @@ function Home() {
     }
   }
 
+  async function handleLoginSubmit(e) {
+    e.preventDefault();
+    let formErrors = false;
+    if (loginPassword.length < 6 || loginPassword.lenght > 255) {
+      formErrors = true;
+      toast.error('Senha Invalida');
+    }
+    if (!isEmail(loginEmail)) {
+      formErrors = true;
+      toast.error('Email invalido');
+    }
+    if (formErrors) return;
+    dispatch(actions.loginRequest({ loginEmail, loginPassword, prevPath }));
+  }
+
   return (
     <>
       <Container>
         <Login>
-          <Form action="submit">
-            <Input type="text" placeholder="Usuario" />
-            <Input type="password" placeholder="Senha" />
+          <Form onSubmit={handleLoginSubmit}>
+            <Input
+              type="text"
+              placeholder="Usuario"
+              value={loginEmail}
+              onChange={(e) => {
+                setLoginEmail(e.target.value);
+              }}
+            />
+            <Input
+              type="password"
+              placeholder="Senha"
+              value={loginPassword}
+              onChange={(e) => {
+                setLoginPassword(e.target.value);
+              }}
+            />
             <BtnLogin type="submit">Entrar</BtnLogin>
           </Form>
         </Login>

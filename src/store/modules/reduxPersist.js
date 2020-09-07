@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: 'MyGameListv1',
       storage,
-      whitelist: ['exampleReducer'],
+      whitelist: ['auth'],
     },
     reducers
   );
