@@ -13,3 +13,10 @@ export function changePage(payload) {
     payload,
   };
 }
+
+export function childLetter(payload) {
+  return {
+    type: types.CHILD_LETTER,
+    payload,
+  };
+}

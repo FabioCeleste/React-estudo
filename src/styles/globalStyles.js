@@ -27,7 +27,7 @@ export default createGlobalStyle`
     border: none;
     color: #fff;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 35px;
     font-weight: 700;
   }
 

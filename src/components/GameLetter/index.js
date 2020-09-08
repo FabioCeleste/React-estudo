@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import * as actions from '../../store/modules/list/actions';
 
-import { Letter, Letters } from './styles';
+import { Letter, Letters, Form, Input } from './styles';
 
 function GameLetter() {
   const dispatch = useDispatch();
@@ -36,8 +36,14 @@ function GameLetter() {
     'y',
     'z',
   ]);
+  const [search, setSearch] = useState('');
 
   function handleClickLetter(letter) {
+    dispatch(actions.changeLetter({ letter }));
+  }
+
+  function handleSearch(e, letter) {
+    e.preventDefault();
     dispatch(actions.changeLetter({ letter }));
   }
 
@@ -48,13 +54,24 @@ function GameLetter() {
           return (
             <Letter
               key={alfaLetter}
-              onClick={(e) => handleClickLetter(alfaLetter)}
+              onClick={() => handleClickLetter(alfaLetter)}
             >
               {alfaLetter}
             </Letter>
           );
         })}
       </Letters>
+
+      <Form action="submit">
+        <Input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button type="submit" onClick={(e) => handleSearch(e, search)}>
+          pesquisar
+        </button>
+      </Form>
     </div>
   );
 }

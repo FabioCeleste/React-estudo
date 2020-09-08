@@ -10,3 +10,4 @@ export const PERSIST_REHYDRATE = 'persist/REHYDRATE';
 
 export const CHANGE_LETTER = 'CHANGE_LETTER';
 export const CHANGE_PAGE = 'CHANGE_PAGE';
+export const CHILD_LETTER = 'CHILD_LETTER';

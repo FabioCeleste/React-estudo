@@ -10,6 +10,7 @@ export default function reducer(state = initialState, action) {
     case types.CHANGE_LETTER: {
       const newState = { ...state };
       newState.letter = action.payload.letter;
+      newState.page = 1;
       return newState;
     }
     case types.CHANGE_PAGE: {
@@ -17,6 +18,7 @@ export default function reducer(state = initialState, action) {
       newState.page = action.payload.page;
       return newState;
     }
+
     default: {
       return initialState;
     }

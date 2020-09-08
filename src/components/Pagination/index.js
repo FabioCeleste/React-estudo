@@ -10,9 +10,17 @@ function Pagination(props) {
   const currentPage = useSelector((state) => state.list.page);
   const [maxPages, setMaxPages] = useState([]);
   const numbersOfPages = Math.ceil(props.maxOfPage / 15);
+
   function Paginator() {
     const arrayPages = [];
     let pagesToShow = [];
+
+    if (numbersOfPages <= 11) {
+      for (let i = 1; i < numbersOfPages; i++) {
+        pagesToShow.push(i);
+      }
+      return setMaxPages(pagesToShow);
+    }
 
     for (let i = 1; i <= numbersOfPages; i++) {
       arrayPages.push(i);
@@ -28,6 +36,7 @@ function Pagination(props) {
         setMaxPages(pagesToShow);
       }
     }
+
     if (currentPage !== numbersOfPages) {
       setMaxPages(pagesToShow);
     } else {

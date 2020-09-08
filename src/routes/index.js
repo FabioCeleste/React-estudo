@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 import NotFound from '../pages/404';
 import List from '../pages/List';
 import Profile from '../pages/Profile';
+import Reset from '../pages/Reset';
 
 function Routes() {
   return (
@@ -14,6 +15,7 @@ function Routes() {
       <MyRoute exact path="/" component={Home} />
       <MyRoute exact path="/profile" component={Profile} />
       <MyRoute exact path="/list" component={List} isClosed />
+      <MyRoute exact path="/resettwo/:token" component={Reset} />
       <MyRoute path="*" component={NotFound} />
     </Switch>
   );

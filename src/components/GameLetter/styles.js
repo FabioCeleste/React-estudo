@@ -12,4 +12,18 @@ export const Letter = styled.li`
 `;
 export const Letters = styled.ul`
   display: flex;
+  flex-wrap: wrap;
+`;
+
+export const Form = styled.form`
+  padding-top: 25px;
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  margin-left: 135px;
+`;
+
+export const Input = styled.input`
+  padding: 5px 5px;
+  margin-right: 20px;
 `;
