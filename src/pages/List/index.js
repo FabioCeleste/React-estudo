@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import GameLetter from '../../components/GameLetter';
 import Pagination from '../../components/Pagination';
 import GameList from '../../components/GameList';
+import SideProfile from '../../components/SideProfile';
 
-import * as actions from '../../store/modules/list/actions';
 import axios from '../../services/axios';
-import { Container, Profile, Main, Title } from './styles';
+import { Container, Main, Title } from './styles';
 
 function List() {
   const [games, setGames] = useState([]);
@@ -31,9 +31,7 @@ function List() {
 
   return (
     <Container>
-      <Profile>
-        <h1>Aqui fica o perfil</h1>
-      </Profile>
+      <SideProfile />
       <Main>
         <Title>MyGameList</Title>
 
