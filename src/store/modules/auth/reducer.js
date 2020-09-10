@@ -19,6 +19,16 @@ export default function reducer(state = initialState, action) {
     case types.LOGIN_FAILURE: {
       return initialState;
     }
+    case types.REGISTER_SUCCESS: {
+      const newState = { ...state };
+      newState.user.email = action.payload.email;
+      newState.user.name = action.payload.user_name;
+      return newState;
+    }
+    case types.REGISTER_FAILURE: {
+      const newState = { ...state };
+      return newState;
+    }
     default: {
       return state;
     }

@@ -20,3 +20,9 @@ export function childLetter(payload) {
     payload,
   };
 }
+
+export function refreshProfile() {
+  return {
+    type: types.REFRESH_PROFILE,
+  };
+}

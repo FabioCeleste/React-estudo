@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import axios from '../../services/axios';
+import history from '../../services/history';
 import * as actions from '../../store/modules/auth/actions';
 
 import {
@@ -31,6 +32,8 @@ function SideProfile() {
   const [newEmail, setNewEmail] = useState('');
 
   const userId = useSelector((state) => state.auth.user);
+  const refresh = useSelector((state) => state.list.refresh);
+
   useEffect(() => {
     setNewEmail(userId.email);
     setNewName(userId.name);
@@ -44,11 +47,11 @@ function SideProfile() {
       SetDropGames(response.data.dropGame);
     }
     getUser();
-  }, []);
+  }, [edit, refresh]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch({ newName, newEmail });
+    dispatch(actions.registerRequest({ newName, newEmail }));
   }
 
   return (
@@ -72,7 +75,9 @@ function SideProfile() {
             </Info>
             <Buttons>
               <Button onClick={() => setEdit(!edit)}>Editar</Button>
-              <Button>Ver Perfil</Button>
+              <Button onClick={() => history.push(`/user/${user.id}`)}>
+                Ver Perfil
+              </Button>
               <Button>Sair</Button>
             </Buttons>
           </>

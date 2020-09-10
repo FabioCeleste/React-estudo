@@ -3,6 +3,7 @@ import * as types from '../types';
 const initialState = {
   letter: 'a',
   page: 1,
+  refresh: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -18,7 +19,11 @@ export default function reducer(state = initialState, action) {
       newState.page = action.payload.page;
       return newState;
     }
-
+    case types.REFRESH_PROFILE: {
+      const newState = { ...state };
+      newState.refresh = !newState.refresh;
+      return newState;
+    }
     default: {
       return initialState;
     }

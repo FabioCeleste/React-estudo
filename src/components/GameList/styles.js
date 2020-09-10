@@ -5,6 +5,10 @@ export const GamesMenuList = styled.ul`
 `;
 export const GameMenuItem = styled.li`
   padding-right: 15px;
+  cursor: pointer;
+  :hover {
+    font-size: 20px;
+  }
 `;
 
 export const GameItem = styled.li`

@@ -12,9 +12,10 @@ import Reset from '../pages/Reset';
 function Routes() {
   return (
     <Switch>
-      <MyRoute exact path="/" component={Home} />
+      <MyRoute exact path="/login" component={Home} />
       <MyRoute exact path="/profile" component={Profile} />
-      <MyRoute exact path="/list" component={List} isClosed />
+      <MyRoute exact path="/" component={List} isClosed />
+      <MyRoute exact path="/user/:id" component={Profile} isClosed />
       <MyRoute exact path="/resettwo/:token" component={Reset} />
       <MyRoute path="*" component={NotFound} />
     </Switch>

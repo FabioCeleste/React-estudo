@@ -31,7 +31,32 @@ function persistRehydrate({ payload }) {
   axios.defaults.headers.Authorization = `Bearer ${token}`;
 }
 
-function registerRequest({ payload }) {}
+function* registerRequest({ payload }) {
+  const { newName, newEmail } = payload;
+
+  try {
+    if (newName) {
+      yield call(axios.put, '/update', {
+        email: newEmail,
+        user_name: newName,
+      });
+      toast.success('Dados Atualizados');
+      yield put(
+        actions.registerSuccess({ user_name: newName, email: newEmail })
+      );
+    }
+  } catch (e) {
+    const errors = get(e, 'response.data.errors', []);
+    if (errors.length > 0) {
+      errors.map((error) => {
+        return toast.error(error);
+      });
+    } else {
+      toast.error(e);
+    }
+    yield put(actions.loginFailure());
+  }
+}
 
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
