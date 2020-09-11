@@ -18,7 +18,7 @@ function* loginRequest({ payload }) {
     yield put(actions.loginSucess({ ...response.data }));
     toast.success(`Seja Bem Vindo ${response.data.user.name}`);
     axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-    history.push(payload.prevPath);
+    history.push('/');
   } catch (e) {
     toast.error('Usuario ou senha invalida');
     yield put(actions.loginFailure);

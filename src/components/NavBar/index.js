@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Nav, Brand, Register, Header, NavLi, Login } from './styles';
+import {
+  Nav,
+  Brand,
+  Register,
+  Header,
+  NavLi,
+  Login,
+  Input,
+  Btn,
+} from './styles';
+import history from '../../services/history';
 
 function NavBar() {
+  const [searchUser, setSearchUser] = useState('');
+  function handleClick(e) {
+    e.preventDefault();
+    if (!searchUser) {
+      return;
+    }
+    history.push(`/users/${searchUser}`);
+  }
   return (
     <Header>
-      <Brand>MyGameList</Brand>
-
+      <Brand onClick={() => history.push('/')}>MyGameList</Brand>
       <Nav>
-        <NavLi>
-          <Login href="#">Entrar</Login>
-        </NavLi>
-        <NavLi>
-          <Register href="#">Cadastrar</Register>
-        </NavLi>
+        <Input
+          type="text"
+          value={searchUser}
+          onChange={(e) => setSearchUser(e.target.value)}
+        />
+        <Btn onClick={handleClick}>Pesquisar</Btn>
       </Nav>
     </Header>
   );

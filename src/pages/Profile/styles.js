@@ -35,6 +35,7 @@ export const Lists = styled.div`
   padding-top: 75px;
   font-size: 35px;
 `;
+
 export const BeatGames = styled.div`
   font-size: 15px;
   max-width: 300px;
@@ -60,4 +61,22 @@ export const UnFollow = styled.button`
   &:hover {
     background: ${colors.errorColor};
   }
+`;
+
+export const RemoveFav = styled.span`
+  font-size: 15px;
+  color: ${colors.errorColor};
+  cursor: pointer;
+`;
+
+export const FollowsList = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 70vw;
+  padding-top: 75px;
+  font-size: 35px;
+`;
+export const Follower = styled.p`
+  cursor: pointer;
+  font-size: 20px;
 `;

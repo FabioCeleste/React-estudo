@@ -8,6 +8,7 @@ import NotFound from '../pages/404';
 import List from '../pages/List';
 import Profile from '../pages/Profile';
 import Reset from '../pages/Reset';
+import Users from '../pages/Users';
 
 function Routes() {
   return (
@@ -17,6 +18,7 @@ function Routes() {
       <MyRoute exact path="/" component={List} isClosed />
       <MyRoute exact path="/user/:id" component={Profile} isClosed />
       <MyRoute exact path="/resettwo/:token" component={Reset} />
+      <MyRoute exact path="/users/:search" component={Users} />
       <MyRoute path="*" component={NotFound} />
     </Switch>
   );

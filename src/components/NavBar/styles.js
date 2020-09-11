@@ -14,6 +14,7 @@ export const Brand = styled.h1`
   font-weight: bold;
   padding: 15px 0 15px 60px;
   color: #e7e7e7;
+  cursor: pointer;
   @media (max-width: 600px) {
     padding: 10px;
   }
@@ -40,4 +41,13 @@ export const NavLi = styled.li`
 export const Login = styled.a`
   color: #e7e7e7;
   border-radius: 8px;
+`;
+
+export const Input = styled.input`
+  font-size: 20px;
+  margin-right: 20px;
+`;
+export const Btn = styled.button`
+  background: ${primaryDarkColor};
+  margin-right: 20px;
 `;

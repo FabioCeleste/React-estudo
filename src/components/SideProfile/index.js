@@ -30,6 +30,7 @@ function SideProfile() {
   const [edit, setEdit] = useState(false);
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
+  const [searchUser, setSearchUser] = useState('');
 
   const userId = useSelector((state) => state.auth.user);
   const refresh = useSelector((state) => state.list.refresh);
@@ -54,11 +55,30 @@ function SideProfile() {
     dispatch(actions.registerRequest({ newName, newEmail }));
   }
 
+  function handleClick(e) {
+    e.preventDefault();
+    if (!searchUser) {
+      return;
+    }
+    history.push(`/users/${searchUser}`);
+  }
+
+  function handleLogout() {
+    dispatch(actions.loginFailure());
+    history.push('/login');
+  }
+
   return (
     <Container>
       <Form action="submit">
-        <Input type="text" placeholder="Procure por usuarios" />
-        <button type="submit">pesquisar</button>
+        <Input
+          type="text"
+          value={searchUser}
+          onChange={(e) => setSearchUser(e.target.value)}
+        />
+        <button type="submit" onClick={(e) => handleClick(e)}>
+          pesquisar
+        </button>
       </Form>
       <Main>
         <ProfPic />
@@ -78,7 +98,7 @@ function SideProfile() {
               <Button onClick={() => history.push(`/user/${user.id}`)}>
                 Ver Perfil
               </Button>
-              <Button>Sair</Button>
+              <Button onClick={handleLogout}>Sair</Button>
             </Buttons>
           </>
         )}
